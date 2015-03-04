@@ -1,0 +1,62 @@
+== Additional functions
+
+This section describes some additional methods of the mould set object.
+
+[[np]]
+* *np* (_ms_) +
+-> _np_ +
+ +
+Returns the <<moulds,NP value>> ('not present') for the mould set _ms_.
+
+
+'''
+[[sizeof]]
+* *sizeof* (_ms_, _typename_ [, _fieldname_]) +
+-> _size_, _first_, _last_, _descr_ +
+ +
+Returns the size of the field named _fieldname_ in the type named _typename_, the
+indices of its first and last terminals in a type instance, and a string describing
+its structure. +
+ +
+If _fieldname_ is not supplied, it applies to the outermost field
+(same as _ms:sizeof(typename,'*')_). +
+ +
+The _typename_ argument may also be a type instance, in which case its type name is
+used.
+
+'''
+[[__tostring]]
+* *$$__tostring$$* (_ms_) +
+-> _string_ +
+ +
+Returns a string describing the types currently defined in the mould set _ms_ 
+(metamethod for Lua's http://www.lua.org/manual/5.3/manual.html#pdf-tostring[tostring]( )).
+
+
+'''
+[[tostring]]
+* *tostring* (_ms_, _s_ [, _fieldname_ [, _sep_]]) +
+-> _string_ +
+ +
+Returns a string with the full name of the field named _fieldname_ of the instance _s_,
+followed by its terminal values. If _fieldname_ is not supplied, or if it supplied as
+_nil_ or as _'*'_, the string refers to outermost field (i.e. to the whole _s_).
+The optional _sep_ parameter is the separator to be used when concatenating the elements
+contained in the string (by default, a single space is used).
+
+'''
+[[print]]
+* *print* (_ms_, _s_ [, _fieldname_ [, _sep_]]) +
+ +
+Prints the contents of an instance _s_ or of its field name _fieldname_ (this
+function just passes its arguments to <<tostring, tostring>>( ) and prints the
+strings it returns).
+
+'''
+[[version]]
+* *version* (_ms_) +
+-> _version_ +
+ +
+Returns a string with the version of the LuaMoulds module (e.g. _"LuaMoulds v1.0"_).
+
+<<<

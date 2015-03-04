@@ -1,0 +1,63 @@
+
+== Introduction
+
+This manual describes the functions provided by LuaMoulds.
+It is assumed that the reader is familiar with the
+http://www.lua.org[Lua programming language].footnote:[
+This manual is written in
+http://www.methods.co.nz/asciidoc/[AsciiDoc], rendered with
+http://asciidoctor.org/[AsciiDoctor] and a CSS from the
+https://github.com/asciidoctor/asciidoctor-stylesheet-factory[AsciiDoctor Stylesheet Factory].
+The PDF version is produced with
+https://github.com/asciidoctor/asciidoctor-pdf[AsciiDoctor-Pdf].
+]
+
+=== What is LuaMoulds
+
+LuaMoulds is a Lua module that provides means to define **C-like structured types** in Lua.
+
+It has been designed for the definition of formats of messages (in particular, of signals
+exchanged by https://github.com/stetre/lunasdl[LunaSDL] agents),
+but it is a standalone module that can be used as a general purpose type system as well.
+
+=== Getting and installing
+
+The *official repository* of LuaMoulds is on GitHub at the following link:
+*https://github.com/stetre/luamoulds* .
+
+LuaMoulds requires *http://www.lua.org[Lua]* version 5.2 or greater, and
+*http://www.inf.puc-rio.br/~roberto/lpeg/[LPeg]*.
+
+Since it is written in plain Lua, no compiling is needed.
+
+To install LuaMoulds, download the 
+https://github.com/stetre/luamoulds/releases[latest release] and extract it somewhere
+on your system.
+
+To use LuaMoulds, make sure that the base directory containing the `moulds.lua` script
+is in Lua's
+http://www.lua.org/manual/5.3/manual.html#pdf-package.path[_package.path_] (for this
+purpose, there is an example `configure` shell script in the base directory.)
+
+For example, on a GNU/Linux system, you may do this:
+
+[source,shell]
+----
+# ... download luamoulds-0.1.tar.gz ...
+[ ]$ tar -zxpvf luamoulds-0.1.tar.gz
+[ ]$ cd luamoulds-0.1
+[luamoulds-0.1]$ . configure
+----
+
+Some basic examples can be found in the `examples/` directory and are described
+in the <<_examples, Examples>> section of this manual.
+
+=== License
+
+LuaMoulds is released under the *MIT/X11 license* (same as
+http://www.lua.org/license.html[Lua], and with the same only requirement to give proper
+credits to the original author). 
+The copyright notice is in the LICENSE file in the base directory
+of the https://github.com/stetre/luamoulds[official repository] on GitHub.
+
+<<<

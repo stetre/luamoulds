@@ -1,0 +1,110 @@
+
+== Overview
+
+The LuaMoulds module is loaded with Lua's 
+http://www.lua.org/manual/5.3/manual.html#pdf-require[require]( ), 
+as shown in the example below.
+It returns a function that, each time it is called, creates a new database of
+type definitions (which we will call a '*mould set*').
+
+[source, lua]
+----
+moulds = require("moulds")
+
+ms = moulds() -- creates a new mould set (i.e. a database of types)
+----
+
+
+A mould set, when created, has a few <<_primitive_types, *primitive types*>> defined in it.
+
+Additional custom primitive types may be added with the <<primitive, *primitive*>>( ) method.
+
+*Derived types* can then be defined on top of primitives, and added to the mould set
+using the <<typedef,*typedef*>>( ) and the <<ftypedef,*ftypedef*>>( ) methods.
+Derived types are defined with a *C-like typedef syntax* that supports the _struct_
+and _union_ constructs, as well as arrays and nesting. For example:
+
+[source, lua]
+----
+-- defines a few types in the mould set ms:
+ms:typedef([[
+
+-- this is a comment (C and C++ style comments are also supported)
+#include <stdio.h> /* and lines starting with '#' are ignored */
+
+-- some aliases of primitive types:
+typedef boolean myboolean
+typedef string mystring
+typedef void myvoid
+
+-- a derived structured type:
+typedef struct {
+   boolean b      
+   string  s;  -- optional separators ';' or ',' can be used
+   number  arr[5]
+} mytype
+
+]])
+----
+
+
+An *instance* of a LuaMoulds type is a 
+Lua (http://www.lua.org/manual/5.3/manual.html#3.4.7[sequence]
+whose first array-element is a string denoting the type, and the elements that follow are
+the values of the terminal fields. The special value `'?'` is assigned to uninitialized
+terminal fields. This special value is configurable.
+
+To instantiate a type, one can use the <<new,*new*>>( ) method. For example:
+
+[source, lua]
+----
+x = ms:new('mytype') -- create an uninitialized instance of mytype
+--> x = { 'mytype', '?', '?', '?', '?', '?', '?', '?' }
+----
+
+The <<set,*set*>>( ) and <<get,*get*>>( ) methods can then be used to set or get the 
+values of the fields.
+With these methods, fields may be accessed at any level of nesting, including the outermost:
+
+[source, lua]
+----
+-- set some values:
+ms:set(x, 'b', true)          -- set the x.b field
+ms:set(x, 's', 'this is s')   -- set the x.s field
+ms:set(x, 'arr', 12, 25, 41)  -- set (part of) the x.arr field
+--> x = { 'mytype', true, 'this is s', 12, 25, 41, '?', '?' }
+
+-- get some values:
+print(ms:get(x, '*'))     --> true  'this is s'  12  25  41  ?  ?  (the whole type)
+print(ms:get(x, 'b'))     --> true
+print(ms:get(x, 's'))     --> 'this is s'
+print(ms:get(x, 'arr'))   --> 12  25  41  ?  ?  (the whole array)
+print(ms:get(x, 'arr.2')  --> 25  (only the 2nd element)
+
+-- copy a whole array from an instance to another:
+y = ms:new('mytype')
+ms:set(y, 'arr', ms:get(x, 'arr'))  
+--> y = { 'mytype', '?', '?', 12, 25, 41, '?', '?' }
+----
+
+Fields are referred to with a *dot notation* similar to the notation used in C,
+but with a couple of differences:  elements of arrays are named with their index, starting
+from 1 (e.g., the elements of the _arr_ array in the above example are named
+`'arr.1'`, `'arr.2'`, ..., `'arr.5'`), and the special name `$$'*'$$` is used to denote the
+whole type.
+
+Besides having a structure encoded in the type name, LuaMoulds instances are
+still regular Lua tables, and as such, their fields are *dynamically typed*. 
+That is, any valid Lua value may be assigned to a terminal field, and values of different
+types may be assigned to it at different times. 
+
+The <<set,*set*>>( ) and <<get,*get*>>( ) methods don't do type-checking on the values they write in
+or read from type instances.
+For *safe access*, LuaMoulds provides the two additional methods <<tset,*tset*>>( ) and 
+<<tget,*tget*>>( ),
+where the 't' stands for 'terminal' as these methods can only be used to access terminal fields.
+It provides also two methods, <<pset,*pset*>>( ) and <<pget,*pget*>>( ), to conveniently
+access instances of primitive types without the need to specify a field name.
+
+
+<<<

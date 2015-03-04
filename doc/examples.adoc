@@ -1,0 +1,16 @@
+== Examples
+
+The scripts for the examples listed here can be found in the `examples/` directory
+of the official LuaMoulds release.
+
+include::example_basic.adoc[]
+
+include::example_fromfile.adoc[]
+
+include::example_safe.adoc[]
+
+include::example_primitives.adoc[]
+
+include::example_matrix.adoc[]
+
+<<<

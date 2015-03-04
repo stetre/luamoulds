@@ -1,0 +1,16 @@
+
+=== Basic
+
+:exampledir: {examplesdir}/basic
+
+Just a basic example, with the creation of a mould set and of a type instance, and
+the access of some of its fields.
+
+The script for this example is in the `examples/basic/` directory.
+
+[source,lua]
+----
+include::{exampledir}/basic.lua[]
+----
+
+<<<

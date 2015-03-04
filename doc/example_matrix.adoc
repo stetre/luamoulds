@@ -1,0 +1,19 @@
+
+=== Multidimensional arrays
+
+:exampledir: {examplesdir}/matrix
+
+This example shows how LuaMoulds can be used to create multi-dimensional arrays.
+
+Of course this method is not suited for large and sparse arrays (because instances of
+LuaMoulds types always have a value for each terminal field), but otherwise it has
+some advantages like, for example, built-in boundary checks and type-checking. 
+
+The script for this example is in the `examples/matrix/` directory.
+
+[source,lua]
+----
+include::{exampledir}/matrix.lua[]
+----
+
+<<<

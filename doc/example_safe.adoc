@@ -1,0 +1,18 @@
+
+=== Safe access
+
+:exampledir: {examplesdir}/safe
+
+In this example, an error is deliberately caused by trying to write an invalid
+value in a terminal field with the <<tset, *tset*>>( ) method. This method is 
+'safe', in that it checks that the value is consistent with the field's type
+and if it is not, it raises an error.
+
+The script for this example is in the `examples/safe/` directory.
+
+[source,lua]
+----
+include::{exampledir}/safe.lua[]
+----
+
+<<<

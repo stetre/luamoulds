@@ -1,0 +1,5 @@
+# luamoulds .gitignore
+
+*.log
+local/
+tests/

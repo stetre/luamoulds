@@ -1,0 +1,23 @@
+
+=== Primitive types
+
+:exampledir: {examplesdir}/primitives
+
+This short example shows how the <<pset, *pset*>>( ) and <<pget, *pget*>>( ) methods
+can be conveniently used instead of <<tset, *tset*>>( ) and <<tget, *tget*>>( ), when
+operating on instances of <<_primitive_types, primitive types>>.
+
+Since primitive types (except for the _void_ type, which can not be accessed) have only
+one terminal field in them, the two methods do not require the caller to specify a field name. 
+
+The example also shows how to define custom primitive types with the
+<<primitive, *primitive*>>( ) method.
+
+The script for this example is in the `examples/primitives/` directory.
+
+[source,lua]
+----
+include::{exampledir}/primitives.lua[]
+----
+
+<<<

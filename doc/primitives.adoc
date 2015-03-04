@@ -1,0 +1,112 @@
+
+== Primitive types
+
+Primitive types are types for terminal fields, that can be combined using the typedef
+constructs to define derived types.
+
+With the exception of the pre-defined *void* type, which has size 0, all primitive types
+have size 1, where the *size of a type* is the number of terminal fields it has.
+
+=== Pre-defined primitive types
+
+A mould set, when created, has the following primitive types defined in it:
+
+* Lua's native http://www.lua.org/manual/5.3/manual.html#2.1[*basic types*]
+(with the exception of *nil*),
+
+* the *void* type (a type having no values),
+
+* a few constrained numeric types (*bit*, *char*, *short*, *int*, etc.), and
+
+* the *bitstr* and *hexstr* types (strings representing binary and hexadecimal data).
+
+
+The full list of pre-defined primitive types, and a description of the values they admit,
+can be found in the tables below. 
+
+.The void primitive type
+[cols="15,10,75", options="header"]
+|===
+|Type | Size | Values
+|*void* | 0 | none
+|===
+
+.Lua's native primitive types
+[cols="15,10,75", options="header"]
+|===
+|Type | Size | Values
+|*boolean* | 1 | any Lua _boolean_
+|*number* | 1 | any Lua _number_
+|*string* | 1 | any Lua _string_
+|*function* | 1 | any Lua _function_
+|*table* | 1 | any Lua _table_
+|*thread* | 1 | any Lua _thread_
+|*userdata* | 1 | any Lua _userdata_
+|===
+
+<<<
+
+.Constrained numeric primitive types
+[cols="15,10,75", options="header"]
+|===
+|Type | Size | Values
+|*bit* | 1 
+| a Lua _number_ that can be either 0 or 1
+|*char* | 1 
+| any Lua _number_ representing an 8-bit signed integer (-128 &#8804; _x_ &#8804; 127)
+|*uchar* | 1 
+| any Lua _number_ representing an 8-bit unsigned integer (0 &#8804; _x_ &#8804; 255)
+|*short* | 1 
+| any Lua _number_ representing a 16-bit signed integer (-2^15^ &#8804; _x_ &#8804; 2^15^-1)
+|*ushort* | 1 
+| any Lua _number_ representing a 16-bit unsigned integer (0 &#8804; _x_ &#8804; 2^16^-1)
+|*int* | 1 
+| any Lua _number_ representing a 32-bit signed integer (-2^31^ &#8804; _x_ &#8804; 2^31^-1)
+|*uint* | 1 
+| any Lua _number_ representing a 32-bit unsigned integer (0 &#8804; _x_ &#8804; 2^32^-1)
+|*long* | 1 
+| any Lua _number_ representing a 64-bit signed integer (-2^63^ &#8804; _x_ &#8804; 2^63^-1)
+|*ulong* | 1 
+| any Lua _number_ representing a 64-bit unsigned integer (0 &#8804; _x_ &#8804; 2^64^-1)
+|*float* | 1 | any Lua _number_ representing a single precision floating point
+|*double* | 1 | any Lua _number_ (representing a double precision floating point)
+|===
+
+.String-data primitive types
+[cols="15,10,75", options="header"]
+|===
+|Type | Size | Values
+|*bitstr* | 1 
+| any Lua _string_ containing only the characters '0' and '1'
+|*hexstr* | 1 
+| any Lua _string_, of even length, containing only characters from 
+the ranges '0-9', 'a-f' and 'A-F'
+|===
+
+<<<
+
+=== Custom primitive types
+
+Additional primitive types may be added to a mould set by means of the 
+<<primitive,*primitive*>>( ) method described below. A primitive type must
+have size 1, and a check function must be provided for it.
+
+[[primitive]]
+* *primitive* (_ms_, _name_, _checkfunc_) +
+ +
+Defines, in the mould set _ms_, an additional primitive type named _name_ (a string).
+The _checkfunc_ argument must be a function accepting a value and returning _true_ if it
+is a valid value for the newly defined type, or _false_ otherwise. 
+
+.Example: a custom primitive numeric type, constrained between 0 and 1
+[source, lua]
+----
+ms = moulds.new()
+
+local function check_mynumber(x)
+   return type(x)=="number" and x>=0 and x<1
+end
+
+ms:primitive("mynumber", check_mynumber)
+----
+<<<

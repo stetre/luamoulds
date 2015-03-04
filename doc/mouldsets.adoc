@@ -1,0 +1,28 @@
+
+== Mould sets
+
+A *mould set* is a database of types, created with the <<moulds,*moulds*>>( ) function
+returned by the LuaMoulds module when it is loaded with Lua's _require_( ) as in the 
+<<_overview, Overview>> example.
+
+_(One can, of course, assign the function to a different name than *moulds*.
+For clarity, in this manual we will however stick to that name.)_
+
+[[moulds]]
+* *moulds* ([ _np_ ]) +
+-> _ms_ +
+ +
+Creates the new mould set _ms_, having only the pre-defined
+<<_primitive_types, primitive types>>.
+The optional parameter _np_ (a string), if supplied, overrides the default *NP value*
+('not present'), which is the question mark character ('?').
+
+With the exception of the <<moulds,*moulds*>>( ) function, all other functions described
+in this manual are methods of the 'mould set' object (i.e. they can be called either as
+_ms.func(ms, args)_ or as _ms:func(args)_, where _ms_ is a mould set).
+
+Multiple mould sets can be created in the same Lua application, with different types
+defined in them (this can be useful, for example, to create separated interfaces
+when types are used to describe formats of messages).
+
+<<<

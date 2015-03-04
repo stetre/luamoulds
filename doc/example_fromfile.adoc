@@ -1,0 +1,16 @@
+
+=== Definitions from file
+
+:exampledir: {examplesdir}/fromfile
+
+Another basic example, where the definitions are supplied in a file instead
+of a string. 
+
+The script for this example is in the `examples/fromfile/` directory.
+
+[source,lua]
+----
+include::{exampledir}/fromfile.lua[]
+----
+
+<<<

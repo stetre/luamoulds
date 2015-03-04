@@ -1,0 +1,69 @@
+
+== Summary of LuaMoulds functions
+
+The tables below summarize the functions and methods provided by LuaMoulds. 
+
+The behavior of all the functions when an error occurs is to call Lua's
+http://www.lua.org/manual/5.3/manual.html#pdf-error[_error_]( ) function with a
+string message.
+
+.LuaMoulds functions
+[cols="35,20,45", options="header"]
+|===
+|Function | Return values | Description
+|<<moulds, *moulds*>> ([ _np_ ])
+| _ms_
+|Create a new mould set.
+|<<primitive, *ms:primitive*>> (_name_, _checkfunc_)
+|-
+|Define a custom primitive type.
+|<<typedef, *ms:typedef*>> (_defs_)
+| _name~1~_, _name~2~_, _..._
+|Add derived types getting their definitions from a string.
+|<<ftypedef, *ms:ftypedef*>> (_filename_)
+| _name~1~_, _name~2~_, _..._
+|Add derived types getting their definitions from a file.
+|<<new, *ms:new*>> (_typename_)
+| _s_
+|Create a new instance of a type.
+|<<clone, *ms:clone*>> (_s_)
+| _s'_
+|Clone an instance of a type.
+|<<set, *ms:set*>> (_s_, _fieldname_, _..._)
+|-
+|Set or reset the value(s) of a field.
+|<<get, *ms:get*>> (_s_, _fieldname_)
+|_value~1~_, _value~2~_, _..._
+|Get the value(s) of a field.
+|<<tset, *ms:tset*>> (_s_, _fieldname_ [, _value_])
+|-
+|Safely set or reset the value of a terminal field.
+|<<tget, *ms:tget*>> (_s_, _fieldname_)
+|_value_
+|Safely get the value of a terminal field.
+|<<pset, *ms:pset*>> (_s_ [, _value_])
+|-
+|Safely set or reset the value in an instance of a primitive type.
+|<<pget, *ms:pget*>> (_s_)
+|_value_
+|Safely get the value from an instance of a primitive type.
+|<<np, *ms:np*>> ( )
+| _np_
+|Get the _NP value_ for a mould set.
+|<<sizeof, *ms:sizeof*>> (_typename_ [, _fieldname_])
+| _size_, _first_, _last_, _descr_
+|Get the size and other informations about a type or one of its fields.
+|<<__tostring, *ms:$$__tostring$$*>> ( )
+| _string_
+|$$__tostring$$ metamethod.
+|<<tostring, *ms:tostring*>> (_s_ [, _fieldname_ [, _sep_]])
+|_string_
+|Get a string with the name and values of a field.
+|<<print, *ms:print*>> (_s_ [, _fieldname_ [, _sep_]])
+|-
+|Print a string with the name and values of a field.
+|<<version, *ms:version*>> ( )
+|_version_
+|Get the version of the LuaMoulds module.
+|===
+

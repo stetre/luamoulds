@@ -1,0 +1,97 @@
+
+== Type instances
+
+An *instance* of a LuaMoulds type is a 
+Lua http://www.lua.org/manual/5.3/manual.html#3.4.7[sequence]
+whose first array-element is a string denoting the type, and the elements that follow are
+the values of the terminal fields. A special <<moulds,NP value>> ('not present'), which by
+default is `'?'`, is assigned to uninitialized (or absent) terminal fields.
+
+Instances can be created with the <<new,*new*>>( ) or the <<clone, *clone*>>( ) methods.
+
+Fields can be accessed with the <<set, *set*>>( ) and <<get, *get*>>( ) methods,
+or with the <<tset, *tset*>>( ) and <<tget, *tget*>>( ) methods that provide *safe access* to
+terminal fields (that is, they check that the values are consistent with the fields types).
+
+For instances of primitive types (or of aliases of primitives), the <<pset, *pset*>>( ) and
+<<pget, *pget*>>( ) methods are also provided in order to access the only value they contain
+without the need to specify the field name. These methods are also safe.
+
+Fields are referred to with a *dot notation* similar to the notation used in C to access
+fields in nested structures, but with a couple of differences: elements of arrays are named
+with their index, starting from 1 (e.g.,`'arr.1'`, `'arr.2'`, ...), and the special 
+name `$$'*'$$` denotes the whole type (that is, the outermost-level field).
+
+
+=== Creating instances
+
+[[new]]
+* *new* (_ms_, _typename_) +
+-> _s_ +
+ +
+Creates a new instance _s_ of the type named _typename_ from the mould set _ms_.
+The terminal fields of the new instance are initialized to the <<moulds,NP value>> ('not present').
+
+'''
+[[clone]]
+* *clone* (_ms_, _s_) +
+-> _s'_ +
+ +
+Creates a new instance _s'_ by cloning the already existing instance _s_.
+
+=== Accessing fields
+
+[[set]]
+* *set* (_ms_, _s_, _fieldname_, _..._) +
+ +
+Writes the values supplied in the variable arguments part in the _fieldname_ field
+of the instance _s_. +
+ +
+Assuming _fieldsz_ is the size of the field named _fieldname_, and _nargs_ is the
+number of supplied arguments, then: +
+** if _nargs_ < _fieldsz_, only the first _nargs_ terminal fields are written, while 
+the remaining ones are left untouched;
+** if _nargs_ >= _fieldsz_, the entire field is written with the first _fieldsz_ arguments,
+and any extra value is ignored;
+** if _nargs_ = 0 (no values are supplied), all the terminal fields of _fieldname_ are
+reset to the <<moulds,NP value>> ('not present').
+
+'''
+[[get]]
+* *get* (_ms_, _s_, _fieldname_) +
+-> _value~1~_, _value~2~_, _..._ +
+ +
+Returns the terminal values of the field named _fieldname_ of the instance _s_.
+
+'''
+[[tset]]
+* *tset* (_ms_, _s_, _fieldname_ [, _value_]) +
+ +
+Safely writes _value_ in the _fieldname_ terminal field of the instance _s_. 
+The supplied _value_ must be a valid value for the terminal field's type, 
+or the <<moulds,NP value>> ('not present'). 
+If _value_ is not supplied, the field is reset to the NP value.
+
+'''
+[[tget]]
+* *tget* (_ms_, _s_, _fieldname_) +
+-> _value_ +
+ +
+Safely reads the terminal field named _fieldname_ of the instance _s_. 
+
+'''
+[[pset]]
+* *pset* (_ms_, _s_ [, _value_]) +
+ +
+Same as a <<tset, tset>>( ) call with _fieldname_ = _'*'_, on an instance _s_
+of a primitive type (or of an alias).
+
+'''
+[[pget]]
+* *pget* (_ms_, _s_) +
+-> _value_ +
+ +
+Same as a <<tget, tget>>( ) call with _fieldname_ = _'*'_, on an instance _s_
+of a primitive type (or of an alias).
+
+<<<

@@ -1,0 +1,31 @@
+= LuaMoulds Reference Manual
+Stefano Trettel
+v0.1, 2015-03-04
+:toc: left
+:stylesdir: ./
+:stylesheet: colony.css
+:source-highlighter: pygments
+:pygments-style: autumn
+:source-language: lua
+:examplesdir: ../examples
+
+image::powered-by-lua.gif[Lua logo, link=http://www.lua.org]
+
+include::introduction.adoc[]
+
+include::overview.adoc[]
+
+include::mouldsets.adoc[]
+
+include::primitives.adoc[]
+
+include::typedef.adoc[]
+
+include::instances.adoc[]
+
+include::miscellanea.adoc[]
+
+include::examples.adoc[]
+
+include::summary.adoc[]
+

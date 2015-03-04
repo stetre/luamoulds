@@ -1,0 +1,7 @@
+# Add the path to LuaMoulds to LUA_PATH.
+LUAMOULDS_PATH="$PWD/?.lua;;"
+case :$LUA_PATH: in
+ *$LUAMOULDS_PATH*) ;; # already in
+ *) export LUA_PATH=$LUA_PATH$LUAMOULDS_PATH;;
+esac
+
