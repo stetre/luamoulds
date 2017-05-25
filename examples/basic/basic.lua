@@ -43,4 +43,5 @@ print(ms:get(x, 'b'))   --> true
 print(ms:get(x, 'i'))   --> 123
 print(ms:get(x, 'c.1')) --> 10
 print(ms:get(x, 'c.6')) --> ?
+print(ms:get(x, 'c'))   --> 10 20 30 ? ? ?
 
