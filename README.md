@@ -1,4 +1,4 @@
-##LuaMoulds: A C-like typedef for Lua
+## LuaMoulds: A C-like typedef for Lua
 
 LuaMoulds is a Lua module that provides means to define **C-like structured types** in Lua.
 
