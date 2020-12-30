@@ -1,5 +1,9 @@
 ## LuaMoulds: A C-like typedef for Lua
 
+_*** This project is discontinued, superseded by
+[MoonTypes](https://github.com/stetre/moontypes). ***_
+
+
 LuaMoulds is a Lua module that provides means to define **C-like structured types** in Lua.
 
 It has been designed for the definition of formats of messages (in particular, of signals
